@@ -1,0 +1,21 @@
+import cv2
+import matplotlib.pyplot as plt
+
+image = cv2.imread(r"input.jpg", cv2.IMREAD_GRAYSCALE)
+
+if image is None:
+    raise SystemExit("Image not found")
+
+sift = cv2.SIFT_create()
+keypoints, descriptors = sift.detectAndCompute(image, None)
+
+output = cv2.drawKeypoints(
+    image,
+    keypoints,
+    None,
+    flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS
+)
+
+plt.imshow(output, cmap="gray")
+plt.axis("off")
+plt.show()
